@@ -5,13 +5,6 @@
 double *A, *B, *C;
 long N, K, M, numOfThreads;
 
-void permutation_1();
-void permutation_2();
-void permutation_3();
-void permutation_4();
-void permutation_5();
-void permutation_6();
-
 int main(int argc, char *argv[])
 {
 	long printResults;
@@ -98,12 +91,11 @@ int main(int argc, char *argv[])
 	 */
 	gettimeofday(&start, NULL);
 
-	permutation_1();
-	// permutation_2();
-	// permutation_3();
-	// permutation_4();
-	// permutation_5();
-	// permutation_6();
+	// permutation_1
+	for (int i = 0; i < N; i++)
+		for (int j = 0; j < M; j++)
+			for (int k = 0; k < K; k++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
 
 	gettimeofday(&end, NULL);
 
@@ -122,44 +114,40 @@ int main(int argc, char *argv[])
 	return(0);
 }
 
-void permutation_1() {
+/*
+permutation_1
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < M; j++)
 			for (int k = 0; k < K; k++)
 				C[i * M + j] += A[i * K + k] * B[k * M + j];
-}
 
-void permutation_2() {
+permutation_2
 	for (int i = 0; i < N; i++)
 		for (int k = 0; k < K; k++)
 			for (int j = 0; j < M; j++)
 				C[i * M + j] += A[i * K + k] * B[k * M + j];
-}
 
-void permutation_3() {
+permutation_3
 	for (int j = 0; j < M; j++)
 		for (int i = 0; i < N; i++)
 			for (int k = 0; k < K; k++)
 				C[i * M + j] += A[i * K + k] * B[k * M + j];
-}
 
-void permutation_4() {
+permutation_4
 	for (int j = 0; j < M; j++)
 		for (int k = 0; k < K; k++)
 			for (int i = 0; i < N; i++)
 				C[i * M + j] += A[i * K + k] * B[k * M + j];
-}
 
-void permutation_5() {
+permutation_5
 	for (int k = 0; k < K; k++)
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < M; j++)
 				C[i * M + j] += A[i * K + k] * B[k * M + j];
-}
 
-void permutation_6() {
+permutation_6
 	for (int k = 0; k < K; k++)
 		for (int j = 0; j < M; j++)
 			for (int i = 0; i < N; i++)
 				C[i * M + j] += A[i * K + k] * B[k * M + j];
-}
+*/
