@@ -2,14 +2,21 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-double	*A, *B, *C;
-long	N, K, M, numOfThreads;
+double *A, *B, *C;
+long N, K, M, numOfThreads;
+
+void permutation_1();
+void permutation_2();
+void permutation_3();
+void permutation_4();
+void permutation_5();
+void permutation_6();
 
 int main(int argc, char *argv[])
 {
-	long		i, j, k, printResults;
-	char		*EndPtr;
-	struct timeval	start, end;
+	long printResults;
+	char *EndPtr;
+	struct timeval start, end;
 	double elapsed_time;
 
 	if (argc != 6) {
@@ -70,16 +77,16 @@ int main(int argc, char *argv[])
 	}
 
 	printf("Starting initialization of array A.\n");
-	for (i = 0; i < N; i++) {
-		for (j = 0; j < K; j++) {
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < K; j++) {
 			A[i * K + j] = 3.0 * drand48();
 		}
 	}
 	printf("Finished initialization of array A.\n");
 
 	printf("Starting initialization of array B.\n");
-	for (i = 0; i < K; i++) {
-		for (j = 0; j < M; j++) {
+	for (int i = 0; i < K; i++) {
+		for (int j = 0; j < M; j++) {
 			B[i * M + j] = 3.0 * drand48();
 		}
 	}
@@ -91,13 +98,12 @@ int main(int argc, char *argv[])
 	 */
 	gettimeofday(&start, NULL);
 
-	for (i = 0; i < N; i++) {
-		for (j = 0; j < M; j++) {
-			for (k = 0; k < K; k++) {
-				C[i * M + j] += A[i * K + k] * B[k * M + j];
-			}
-		}
-	}
+	permutation_1();
+	// permutation_2();
+	// permutation_3();
+	// permutation_4();
+	// permutation_5();
+	// permutation_6();
 
 	gettimeofday(&end, NULL);
 
@@ -105,8 +111,8 @@ int main(int argc, char *argv[])
 	printf("Time for multiplication: %f sec\n", elapsed_time);
 
 	if (printResults != 0) {
-		for (i = 0; i < N; i++) {
-			for (j = 0; j < M; j++) {
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
 				printf("%25.16f", C[i * M + j]);
 			}
 			printf("\n");
@@ -116,3 +122,45 @@ int main(int argc, char *argv[])
 	return(0);
 }
 
+void permutation_1() {
+	for (int i = 0; i < N; i++)
+		for (int j = 0; j < M; j++)
+			for (int k = 0; k < K; k++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+}
+
+void permutation_2() {
+	for (int i = 0; i < N; i++)
+		for (int k = 0; k < K; k++)
+			for (int j = 0; j < M; j++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+
+}
+
+void permutation_3() {
+	for (int j = 0; j < M; j++)
+		for (int i = 0; i < N; i++)
+			for (int k = 0; k < K; k++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+}
+
+void permutation_4() {
+	for (int j = 0; j < M; j++)
+		for (int k = 0; k < K; k++)
+			for (int i = 0; i < N; i++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+}
+
+void permutation_5() {
+	for (int k = 0; k < K; k++)
+		for (int i = 0; i < N; i++)
+			for (int j = 0; j < M; j++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+}
+
+void permutation_6() {
+	for (int k = 0; k < K; k++)
+		for (int j = 0; j < M; j++)
+			for (int i = 0; i < N; i++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+}
