@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
 	long		i, j, k, printResults;
 	char		*EndPtr;
 	struct timeval	start, end;
+	double elapsed_time;
 
 	if (argc != 6) {
 		printf("USAGE: %s <N> <K> <M> <PRINT RESULTS> <NUMBER OF THREADS>\n", argv[0]);
@@ -100,7 +101,8 @@ int main(int argc, char *argv[])
 
 	gettimeofday(&end, NULL);
 
-	printf("Time for multiplication: %f sec\n", (double)(end.tv_sec - start.tv_sec) + (double)(end.tv_usec - start.tv_usec) / 1000000.0);
+	elapsed_time = (double)(end.tv_sec - start.tv_sec) + (double)(end.tv_usec - start.tv_usec) / 1000000.0;
+	printf("Time for multiplication: %f sec\n", elapsed_time);
 
 	if (printResults != 0) {
 		for (i = 0; i < N; i++) {
