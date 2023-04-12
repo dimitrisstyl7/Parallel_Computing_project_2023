@@ -134,7 +134,6 @@ void permutation_2() {
 		for (int k = 0; k < K; k++)
 			for (int j = 0; j < M; j++)
 				C[i * M + j] += A[i * K + k] * B[k * M + j];
-
 }
 
 void permutation_3() {
