@@ -91,10 +91,10 @@ int main(int argc, char *argv[])
 	 */
 	gettimeofday(&start, NULL);
 
-	// permutation_1
+	// permutation_2 (best)
 	for (int i = 0; i < N; i++)
-		for (int j = 0; j < M; j++)
-			for (int k = 0; k < K; k++)
+		for (int k = 0; k < K; k++)
+			for (int j = 0; j < M; j++)
 				C[i * M + j] += A[i * K + k] * B[k * M + j];
 
 	gettimeofday(&end, NULL);
@@ -121,7 +121,7 @@ permutation_1
 			for (int k = 0; k < K; k++)
 				C[i * M + j] += A[i * K + k] * B[k * M + j];
 
-permutation_2
+permutation_2 (best)
 	for (int i = 0; i < N; i++)
 		for (int k = 0; k < K; k++)
 			for (int j = 0; j < M; j++)
