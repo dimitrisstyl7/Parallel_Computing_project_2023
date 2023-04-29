@@ -60,31 +60,28 @@ int main(int argc, char *argv[])
 	B = (double *)malloc(K * M * sizeof(double));
 	if (B == NULL) {
 		printf("Could not allocate memory for array B.\n");
+		free(A);
 		exit(2);
 	}
 
 	C = (double *)calloc(N * M, sizeof(double));
 	if (C == NULL) {
 		printf("Could not allocate memory for array C.\n");
+		free(A); free(B);
 		exit(2);
 	}
 
 	printf("Starting initialization of array A.\n");
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < K; j++) {
+	for (int i = 0; i < N; i++)
+		for (int j = 0; j < K; j++)
 			A[i * K + j] = 3.0 * drand48();
-		}
-	}
 	printf("Finished initialization of array A.\n");
 
 	printf("Starting initialization of array B.\n");
-	for (int i = 0; i < K; i++) {
-		for (int j = 0; j < M; j++) {
+	for (int i = 0; i < K; i++)
+		for (int j = 0; j < M; j++)
 			B[i * M + j] = 3.0 * drand48();
-		}
-	}
 	printf("Finished initialization of array B.\n");
-
 
 	/*
 	 * Matrix-Matrix multiplication
