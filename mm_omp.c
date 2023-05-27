@@ -3,7 +3,7 @@
 #include <sys/time.h>
 
 double *A, *B, *C;
-long N, K, M, numOfThreads;
+long N, K, M;
 
 int main(int argc, char *argv[])
 {
@@ -12,9 +12,9 @@ int main(int argc, char *argv[])
     struct timeval start, end;
     double elapsed_time;
 
-    if (argc != 6)
+    if (argc != 5)
     {
-        printf("USAGE: %s <N> <K> <M> <PRINT RESULTS> <NUMBER OF THREADS>\n", argv[0]);
+        printf("USAGE: %s <N> <K> <M> <PRINT RESULTS> \n", argv[0]);
         exit(1);
     }
 
@@ -43,13 +43,6 @@ int main(int argc, char *argv[])
     if (*EndPtr != '\0')
     {
         printf("Invalid number for printResults provided.\n");
-        exit(1);
-    }
-
-    numOfThreads = strtol(argv[5], &EndPtr, 10);
-    if (*EndPtr != '\0' || numOfThreads < 1)
-    {
-        printf("Invalid number of threads provided.\n");
         exit(1);
     }
 
