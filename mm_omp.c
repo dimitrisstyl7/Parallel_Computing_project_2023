@@ -98,7 +98,8 @@ int main(int argc, char *argv[])
      */
     gettimeofday(&start, NULL);
 
-    #pragma omp parallel {
+    #pragma omp parallel 
+    {
         #pragma omp for
         for (int i = 0; i < N; i++)
             for (int k = 0; k < K; k++)
