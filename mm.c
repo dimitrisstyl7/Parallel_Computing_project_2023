@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-double	*A, *B, *C;
-long	N, K, M, numOfThreads;
+double *A, *B, *C;
+long N, K, M, numOfThreads;
 
 int main(int argc, char *argv[])
 {
-	long		i, j, k, printResults;
-	char		*EndPtr;
-	struct timeval	start, end;
+	long printResults;
+	char *EndPtr;
+	struct timeval start, end;
+	double elapsed_time;
 
 	if (argc != 6) {
 		printf("USAGE: %s <N> <K> <M> <PRINT RESULTS> <NUMBER OF THREADS>\n", argv[0]);
@@ -59,52 +60,48 @@ int main(int argc, char *argv[])
 	B = (double *)malloc(K * M * sizeof(double));
 	if (B == NULL) {
 		printf("Could not allocate memory for array B.\n");
+		free(A);
 		exit(2);
 	}
 
 	C = (double *)calloc(N * M, sizeof(double));
 	if (C == NULL) {
 		printf("Could not allocate memory for array C.\n");
+		free(A); free(B);
 		exit(2);
 	}
 
 	printf("Starting initialization of array A.\n");
-	for (i = 0; i < N; i++) {
-		for (j = 0; j < K; j++) {
+	for (int i = 0; i < N; i++)
+		for (int j = 0; j < K; j++)
 			A[i * K + j] = 3.0 * drand48();
-		}
-	}
 	printf("Finished initialization of array A.\n");
 
 	printf("Starting initialization of array B.\n");
-	for (i = 0; i < K; i++) {
-		for (j = 0; j < M; j++) {
+	for (int i = 0; i < K; i++)
+		for (int j = 0; j < M; j++)
 			B[i * M + j] = 3.0 * drand48();
-		}
-	}
 	printf("Finished initialization of array B.\n");
-
 
 	/*
 	 * Matrix-Matrix multiplication
 	 */
 	gettimeofday(&start, NULL);
 
-	for (i = 0; i < N; i++) {
-		for (j = 0; j < M; j++) {
-			for (k = 0; k < K; k++) {
+	// permutation_2 (best)
+	for (int i = 0; i < N; i++)
+		for (int k = 0; k < K; k++)
+			for (int j = 0; j < M; j++)
 				C[i * M + j] += A[i * K + k] * B[k * M + j];
-			}
-		}
-	}
 
 	gettimeofday(&end, NULL);
 
-	printf("Time for multiplication: %f sec\n", (double)(end.tv_sec - start.tv_sec) + (double)(end.tv_usec - start.tv_usec) / 1000000.0);
+	elapsed_time = (double)(end.tv_sec - start.tv_sec) + (double)(end.tv_usec - start.tv_usec) / 1000000.0;
+	printf("Time for multiplication: %f sec\n", elapsed_time);
 
 	if (printResults != 0) {
-		for (i = 0; i < N; i++) {
-			for (j = 0; j < M; j++) {
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
 				printf("%25.16f", C[i * M + j]);
 			}
 			printf("\n");
@@ -114,3 +111,40 @@ int main(int argc, char *argv[])
 	return(0);
 }
 
+/*
+permutation_1
+	for (int i = 0; i < N; i++)
+		for (int j = 0; j < M; j++)
+			for (int k = 0; k < K; k++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+
+permutation_2 (best)
+	for (int i = 0; i < N; i++)
+		for (int k = 0; k < K; k++)
+			for (int j = 0; j < M; j++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+
+permutation_3
+	for (int j = 0; j < M; j++)
+		for (int i = 0; i < N; i++)
+			for (int k = 0; k < K; k++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+
+permutation_4
+	for (int j = 0; j < M; j++)
+		for (int k = 0; k < K; k++)
+			for (int i = 0; i < N; i++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+
+permutation_5
+	for (int k = 0; k < K; k++)
+		for (int i = 0; i < N; i++)
+			for (int j = 0; j < M; j++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+
+permutation_6
+	for (int k = 0; k < K; k++)
+		for (int j = 0; j < M; j++)
+			for (int i = 0; i < N; i++)
+				C[i * M + j] += A[i * K + k] * B[k * M + j];
+*/
