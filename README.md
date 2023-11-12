@@ -1,4 +1,4 @@
-# Parallel_Computing_project_2023
+# parallel_computing_project_2023
 <h3>Πανεπιστήμιο Πειραιώς</h3>
 
 <h3>Τμήμα Πληροφορικής</h3>
