@@ -3,4 +3,4 @@
 ### Course: Parallel Computing
 ### Semester: 6
 ### Project Completion Year: 2023
-### Project Team: [Dimitris Stylianou](https://github.com/dimitrisstyl7) | [Apostolis Siampanis](https://github.com/Apostolis2002) | [Konstantinos Loizidis](https://github.com/kostas96674)
+### Project Team: [Dimitris Stylianou](https://github.com/dimitrisstyl7) | [Apostolis Siampanis](https://github.com/ApostolisSiampanis) | [Konstantinos Loizidis](https://github.com/kostas96674)
