@@ -123,7 +123,7 @@ Different thread counts and chunk sizes were used to study their impact on perfo
 
 ## Project Documentation
 
-For detailed information about the architecture, code structure, and functionalities, refer to the `Project-documentation.pdf` located in the `/docs` directory. This document covers all aspects of the MVC pattern, the database schema, and role-based access control used in the application.
+For detailed information about the architecture, code structure, and functionalities, refer to the `Project-documentation.pdf` located in the `/docs` directory.
 
 ## Contributors
 
