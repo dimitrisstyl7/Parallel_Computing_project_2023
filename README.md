@@ -43,6 +43,84 @@ Different thread counts and chunk sizes were used to study their impact on perfo
 
 - Chunk sizes of **4** and **100** for scheduling policies in OpenMP.
 
+## Setup Instructions
+
+1. **Linux Requirement**
+
+    It is necessary to use a Linux-based system for this project. You can either install a Linux distribution (e.g., **Ubuntu 20.04.2 LTS**) directly on your machine or run it in a virtual machine using software like **VirtualBox** or **VMware Player**. Ensure that the system supports multiple CPU cores, as parallel programs will be executed.
+
+2. **Compilation and Execution**
+
+    - **Compiling the Sequential Program**
+
+        To compile the provided sequential matrix multiplication program:
+
+        ```bash
+        gcc -O3 -Wall -Wextra -o mm mm.c
+        ```
+
+        This creates an executable named `mm`. You can run the program with:
+
+        ```bash
+        ./mm <N> <K> <M> <print_results> <num_threads>
+        ```
+
+        Where:
+
+        - `<N>`, `<K>`, `<M>` are the dimensions of the matrices.
+        - `<print_results>`: Use a non-zero value to print the results or 0 to avoid printing.
+        - `<num_threads>`: Although not used in the sequential version, it should be provided for compatibility with parallel versions.
+
+        For example
+
+        ```bash
+        ./mm 100 400 600 0 1
+        ```
+
+    - **Compiling the Parallel Program with POSIX Threads**
+  
+        To compile your parallel program using **POSIX Threads**:
+
+        ```bash
+        gcc -O3 -pthread -Wall -Wextra -o mm_pthreads mm_pthreads.c
+        ```
+
+        This creates an executable named `mm_pthreads`. Run the program with:
+
+        ```bash
+        ./mm_pthreads <N> <K> <M> <print_results> <num_threads>
+        ```
+
+    - **Compiling the Parallel Program with OpenMP**
+  
+       To compile the program using **OpenMP**:
+
+       ```bash
+       gcc -O3 -fopenmp -Wall -Wextra -o mm_omp mm_omp.c
+       ```
+
+       This creates an executable named `mm_omp`. Set the number of threads for OpenMP using:
+
+       ```basj
+       export OMP_NUM_THREADS=<num_threads>
+       ```
+
+       Then run the program with:
+
+       ```bash
+       ./mm_omp <N> <K> <M> <print_results> <num_threads>
+       ```
+
+3. **Testing and Execution**
+
+    Test your programs with the following matrix sizes:
+
+    - **Square Matrices**: N = K = M = 2000
+    - **Tall A and Wide B**: N = 100, K = 4000, M = 20000
+    - **Wide A and Tall B**: N = 4000, K = 100, M = 20000
+  
+    For more accurate results, test with larger matrices that result in execution times greater than 1 minute for the sequential version. You can use smaller matrices during development for quick testing.
+
 ## Project Documentation
 
 For detailed information about the architecture, code structure, and functionalities, refer to the `Project-documentation.pdf` located in the `/docs` directory. This document covers all aspects of the MVC pattern, the database schema, and role-based access control used in the application.
