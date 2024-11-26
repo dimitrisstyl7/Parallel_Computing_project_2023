@@ -8,7 +8,7 @@ The objective is to implement parallel solutions, compare them with sequential e
 ## Course Information
 - **Institution:** [University of Piraeus](https://www.unipi.gr/en/)
 - **Department:** [Department of Informatics](https://cs.unipi.gr/en/)
-- **Course:** Parallel Computing (2022-2023)
+- **BSc course:** Parallel Computing (2022-2023)
 - **Semester:** 6th
 
 ## Technologies Used
@@ -126,7 +126,7 @@ For detailed information about the architecture, code structure, and functionali
 </table>
 
 ## Acknowledgments
-This project was developed as part of the "Parallel Computing" course at the University of Piraeus. Contributions and feedback are always welcome!
+This project was developed as part of the "Parallel Computing" BSc course at the University of Piraeus. Contributions and feedback are always welcome!
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
